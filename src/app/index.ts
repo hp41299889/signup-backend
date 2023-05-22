@@ -11,6 +11,7 @@ app.use(cors());
 const appInit = async (app: Express): Promise<void> => {
   await register.registerRouter(app);
   await register.registerMiddleWare(app);
+  await register.registerDatabase();
   app.listen(appConfig.port, () => {
     console.log('app is running on port', appConfig.port);
   });
