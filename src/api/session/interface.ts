@@ -23,3 +23,11 @@ export interface SessionStatus {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface CreateSessionDto {
+  name: string;
+  place: string;
+  joinLimit: number;
+  isParking: boolean;
+  isShuttle: boolean;
+}

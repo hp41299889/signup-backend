@@ -2,7 +2,7 @@ import {Express} from 'express';
 
 import * as middleware from '../middleware';
 import {routers} from '../api';
-import {postgres} from '../database';
+import {postgres, seedSession} from '../database';
 
 export const registerRouter = async (app: Express): Promise<void> => {
   Object.entries(routers).forEach(([route, router]) => {
@@ -19,6 +19,9 @@ export const registerDatabase = async (): Promise<void> => {
     .initialize()
     .then(() => {
       console.log('postgres initialize success');
+    })
+    .then(async () => {
+      await seedSession();
     })
     .catch((err: Error) => {
       console.error(err);
