@@ -1,10 +1,14 @@
 import {NextFunction, Request, Response} from 'express';
+import {createHash} from 'crypto';
 
 import {response} from '../../util';
 import {sessionModel} from '../session';
 import * as signupModel from './model';
 import * as signupInterface from './interface';
 import {ApiResponse} from '../interface';
+import {sendMail} from '../../job/mail';
+import {MailOption} from '../../job/mail/interface';
+import {verifyState} from '../verify';
 
 export const postSignup = async (
   req: Request<{}, {}, signupInterface.PostSignup>,
@@ -41,14 +45,36 @@ export const postSignup = async (
       joinNumber: body.joinNumber,
       isParking: body.isParking,
       isShuttle: body.isShuttle,
+      isVerified: false,
       session: session,
     };
-    const signup = await signupModel.createSignup(createSignupDto);
+    // const signup = await signupModel.createSignup(createSignupDto);
+    const nowTime = new Date().getTime();
+    const hash = createHash('sha256')
+      .update(id + nowTime.toString())
+      .digest('hex');
+    verifyState[id] = {
+      hash: hash,
+      life: nowTime + 3600 * 1000,
+    };
+    const mailOption: MailOption = {
+      from: 'dannylu1029@gmail.com',
+      to: body.email,
+      subject: '報名表單驗證',
+      html: `
+      <p>請點擊以下連結驗證</p></br>
+      <a href="http://localhost:8000/verify/${id}?hash=${hash}">點擊以驗證</a>
+      `,
+    };
+    const mailFeedback = await sendMail(mailOption);
+    console.log(mailFeedback);
+
     result.statusCode = 201;
     result.message = 'POST a signup success';
-    result.data = signup;
+    // result.data = signup;
     response(res, result);
   } catch (err) {
+    console.error(err);
     next(err);
   }
 };

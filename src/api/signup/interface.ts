@@ -8,6 +8,7 @@ export interface Signup {
   joinNumber: number;
   isParking: boolean;
   isShuttle: boolean;
+  isVerified: boolean;
   session: Session;
 }
 
@@ -19,6 +20,7 @@ export interface CreateSignupDto {
   joinNumber: number;
   isParking: boolean;
   isShuttle: boolean;
+  isVerified: boolean;
   session: Session;
 }
 
