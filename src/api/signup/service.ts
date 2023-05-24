@@ -9,7 +9,7 @@ import {ApiResponse} from '../interface';
 import {sendMail} from '../../job/mail';
 import {MailOption} from '../../job/mail/interface';
 import {verifyState} from '../verify';
-import {mailerConfig} from '../../config/config';
+import {appConfig, mailerConfig} from '../../config/config';
 
 export const postSignup = async (
   req: Request<{}, {}, signupInterface.PostSignup>,
@@ -64,7 +64,7 @@ export const postSignup = async (
       subject: '報名表單驗證',
       html: `
       <p>請點擊以下連結驗證</p></br>
-      <a href="${mailerConfig.verifyRoute}/${id}?hash=${hash}">點擊以驗證</a>
+      <a href="${appConfig.serverHost}/${mailerConfig.verifyRoute}/${id}?hash=${hash}">點擊以驗證</a>
       `,
     };
     await sendMail(mailOption);
