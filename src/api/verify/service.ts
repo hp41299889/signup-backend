@@ -38,6 +38,7 @@ export const getVerify = async (
       throw result;
     }
     const updated = await signModel.updateSignupToVerifiedById(id);
+    delete verifyState[id];
     result.statusCode = 200;
     result.message = 'verify success';
     result.data = updated;

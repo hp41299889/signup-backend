@@ -4,7 +4,6 @@ import {response} from '../../util';
 import * as sessionModel from './model';
 import {ApiResponse} from '../interface';
 import {SessionStatus} from './interface';
-// import {SessionStatus} from './interface';
 
 export const getAllSessions = async (
   req: Request<{}, {}, {}>,
@@ -31,7 +30,6 @@ export const getAllSessions = async (
     result.data = sesstionStatus;
     response(res, result);
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };

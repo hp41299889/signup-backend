@@ -19,6 +19,7 @@ export const postgresConfig: configInterface.PostgresConfig = {
 };
 
 export const mailerConfig: configInterface.MailerConfig = {
+  verifyRoute: env.MAILER_VERIFY_ROUTE || '/verify',
   user: env.MAILER_USER || '',
   clientId: env.MAILER_CLIENTID || '',
   clientSecret: env.MAILER_CLIENTSECRET || '',

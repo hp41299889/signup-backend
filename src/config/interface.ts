@@ -15,6 +15,7 @@ export interface PostgresConfig extends ServiceConfig {
 }
 
 export interface MailerConfig {
+  verifyRoute: string;
   user: string;
   clientId: string;
   clientSecret: string;
