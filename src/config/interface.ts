@@ -19,5 +19,4 @@ export interface MailerConfig {
   clientId: string;
   clientSecret: string;
   refreshToken: string;
-  accessToken: string;
 }

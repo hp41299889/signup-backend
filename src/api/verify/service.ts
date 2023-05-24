@@ -3,6 +3,7 @@ import {NextFunction, Request, Response} from 'express';
 import {ApiResponse} from '../interface';
 import {verifyState} from './state';
 import {response} from '../../util';
+import {signModel} from '../signup';
 
 export const getVerify = async (
   req: Request<{id: string}, {}, {}, {hash: string}>,
@@ -36,27 +37,10 @@ export const getVerify = async (
       result.data = null;
       throw result;
     }
+    const updated = await signModel.updateSignupToVerifiedById(id);
     result.statusCode = 200;
     result.message = 'verify success';
-    result.data = verifyState[id];
-    response(res, result);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const getGoogleCode = async (
-  req: Request<{}, {}, {}, {code: string}>,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const {code} = req.query;
-    const result: ApiResponse = {
-      statusCode: 200,
-      message: 'get google code',
-      data: code,
-    };
+    result.data = updated;
     response(res, result);
   } catch (err) {
     next(err);

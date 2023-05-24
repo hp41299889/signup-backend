@@ -48,7 +48,7 @@ export const postSignup = async (
       isVerified: false,
       session: session,
     };
-    // const signup = await signupModel.createSignup(createSignupDto);
+    const signup = await signupModel.createSignup(createSignupDto);
     const nowTime = new Date().getTime();
     const hash = createHash('sha256')
       .update(id + nowTime.toString())
@@ -63,15 +63,13 @@ export const postSignup = async (
       subject: '報名表單驗證',
       html: `
       <p>請點擊以下連結驗證</p></br>
-      <a href="http://localhost:8000/verify/${id}?hash=${hash}">點擊以驗證</a>
+      <a href="http://localhost:3001/verify/${id}?hash=${hash}">點擊以驗證</a>
       `,
     };
-    const mailFeedback = await sendMail(mailOption);
-    console.log(mailFeedback);
-
+    await sendMail(mailOption);
     result.statusCode = 201;
     result.message = 'POST a signup success';
-    // result.data = signup;
+    result.data = signup;
     response(res, result);
   } catch (err) {
     console.error(err);

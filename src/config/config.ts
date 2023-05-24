@@ -23,5 +23,4 @@ export const mailerConfig: configInterface.MailerConfig = {
   clientId: env.MAILER_CLIENTID || '',
   clientSecret: env.MAILER_CLIENTSECRET || '',
   refreshToken: env.MAILER_REFRESH_TOKEN || '',
-  accessToken: env.MAILER_ACCESSTOKEN || '',
 };
