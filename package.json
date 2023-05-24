@@ -29,6 +29,7 @@
     "typeorm": "npx typeorm-ts-node-commonjs",
     "migrate:g": "yarn typeorm migration:generate ./src/database/migration/migration -d ./src/database/postgres/datasource.ts",
     "migrate:r": "yarn typeorm migration:run -d ./build/src/database/postgres/datasource.js",
+    "docker:b": "yarn build && docker build -f docker/Dockerfile -t signup-backend .",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",

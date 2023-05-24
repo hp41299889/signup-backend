@@ -3,8 +3,10 @@ export interface ServiceConfig {
 }
 
 export interface AppConfig extends ServiceConfig {
+  serverHost: string;
   debug: string;
   environment: string;
+  prefix: string;
 }
 
 export interface PostgresConfig extends ServiceConfig {
