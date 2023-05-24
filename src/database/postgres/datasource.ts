@@ -2,6 +2,7 @@ import {DataSource} from 'typeorm';
 
 import {postgresConfig, appConfig} from '../../config/config';
 import {entities} from '../../api/entities';
+import {Migration1684896807911} from '../migration/1684896807911-migration';
 
 export const postgres = new DataSource({
   type: 'postgres',
@@ -11,7 +12,7 @@ export const postgres = new DataSource({
   password: postgresConfig.password,
   database: postgresConfig.database,
   entities: entities,
-  migrations: [],
+  migrations: [Migration1684896807911],
   migrationsTableName: 'migrations',
   synchronize: appConfig.debug === 'true' ? true : false,
 });

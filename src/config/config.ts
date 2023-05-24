@@ -17,3 +17,11 @@ export const postgresConfig: configInterface.PostgresConfig = {
   port: env.HUIHUI_POSTGRES_PORT || 5432,
   database: env.HUIHUI_POSTGRES_DB || 'postgres',
 };
+
+export const mailerConfig: configInterface.MailerConfig = {
+  verifyRoute: env.MAILER_VERIFY_ROUTE || '/verify',
+  user: env.MAILER_USER || '',
+  clientId: env.MAILER_CLIENTID || '',
+  clientSecret: env.MAILER_CLIENTSECRET || '',
+  refreshToken: env.MAILER_REFRESH_TOKEN || '',
+};

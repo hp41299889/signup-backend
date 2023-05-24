@@ -13,3 +13,11 @@ export interface PostgresConfig extends ServiceConfig {
   host: string;
   database: string;
 }
+
+export interface MailerConfig {
+  verifyRoute: string;
+  user: string;
+  clientId: string;
+  clientSecret: string;
+  refreshToken: string;
+}

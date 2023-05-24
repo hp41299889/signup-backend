@@ -28,9 +28,12 @@ export const signupEntity = new EntitySchema<Signup>({
     isShuttle: {
       type: Boolean,
     },
+    isVerified: {
+      type: Boolean,
+    },
   },
   relations: {
-    sessions: {
+    session: {
       target: 'session',
       type: 'many-to-one',
       joinColumn: {

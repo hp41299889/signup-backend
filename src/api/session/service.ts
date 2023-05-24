@@ -3,6 +3,7 @@ import {NextFunction, Request, Response} from 'express';
 import {response} from '../../util';
 import * as sessionModel from './model';
 import {ApiResponse} from '../interface';
+import {SessionStatus} from './interface';
 
 export const getAllSessions = async (
   req: Request<{}, {}, {}>,
@@ -15,10 +16,18 @@ export const getAllSessions = async (
       message: '',
       data: null,
     };
-    const sessions = await sessionModel.readAll();
+    const sessions = await sessionModel.readAllWithSignup();
+    const sesstionStatus: SessionStatus[] = sessions.map(session => {
+      return {
+        ...session,
+        remainingNumber:
+          session.joinLimit -
+          session.signups.reduce((pre, cur) => pre + cur.joinNumber, 0),
+      };
+    });
     result.statusCode = 200;
     result.message = 'get all sessions success';
-    result.data = sessions;
+    result.data = sesstionStatus;
     response(res, result);
   } catch (err) {
     next(err);

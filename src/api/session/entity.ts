@@ -35,4 +35,11 @@ export const sessionEntity = new EntitySchema<Session>({
       updateDate: true,
     },
   },
+  relations: {
+    signups: {
+      target: 'signup',
+      type: 'one-to-many',
+      inverseSide: 'session',
+    },
+  },
 });

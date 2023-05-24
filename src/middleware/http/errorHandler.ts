@@ -13,10 +13,18 @@ export const errorHandler = (
 ): void => {
   logger.debug('error occur');
   const {statusCode, message, data} = err;
-  res.status(statusCode).json({
-    status: 'failed',
-    message: message,
-    data: data,
-  });
+  if (statusCode) {
+    res.status(statusCode).json({
+      status: 'failed',
+      message: message,
+      data: data,
+    });
+  } else {
+    res.status(500).json({
+      status: 'failed',
+      message: message,
+      data: data,
+    });
+  }
   next();
 };
