@@ -64,7 +64,7 @@ export const postSignup = async (
       subject: '報名表單驗證',
       html: `
       <p>請點擊以下連結驗證</p></br>
-      <a href="${appConfig.serverHost}/${mailerConfig.verifyRoute}/${id}?hash=${hash}">點擊以驗證</a>
+      <a href="${appConfig.serverHost}${mailerConfig.verifyRoute}/${id}?hash=${hash}">點擊以驗證</a>
       `,
     };
     await sendMail(mailOption);
