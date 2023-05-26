@@ -1,6 +1,6 @@
 import {postgres} from '../../database';
 import {sessionEntity} from './entity';
-import {CreateSessionDto} from './interface';
+import {CreateSessionDto, UpdateSessionDto} from './interface';
 import {loggerFactory} from '../../util';
 
 const logger = loggerFactory('Model session');
@@ -12,7 +12,7 @@ export const createSession = async (dto: CreateSessionDto) => {
 };
 
 export const readAll = async () => {
-  logger.debug('readAllWithSignup');
+  logger.debug('readAll');
   return await repo.find();
 };
 
@@ -35,4 +35,13 @@ export const readById = async (id: number) => {
       id: id,
     },
   });
+};
+
+export const updateById = async (id: number, dto: UpdateSessionDto) => {
+  return await repo.update(
+    {
+      id: id,
+    },
+    dto
+  );
 };
