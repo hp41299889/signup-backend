@@ -31,3 +31,11 @@ export interface CreateSessionDto {
   isParking: boolean;
   isShuttle: boolean;
 }
+
+export interface UpdateSessionDto {
+  name: string;
+  place: string;
+  joinLimit: number;
+  isParking: boolean;
+  isShuttle: boolean;
+}

@@ -8,6 +8,14 @@ export const createSignup = async (dto: CreateSignupDto) => {
   return await repo.save(dto);
 };
 
+export const readAllSignup = async () => {
+  return await repo.find({
+    relations: {
+      session: true,
+    },
+  });
+};
+
 export const readSignupById = async (id: string) => {
   return await repo.findOne({
     where: {

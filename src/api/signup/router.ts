@@ -1,7 +1,7 @@
 import {Router} from 'express';
 
-import {postSignup} from './service';
+import {getAllSignup, postSignup} from './service';
 
 export const signupRouter = Router();
 
-signupRouter.route('/').post(postSignup);
+signupRouter.route('/').get(getAllSignup).post(postSignup);

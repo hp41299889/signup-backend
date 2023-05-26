@@ -11,6 +11,48 @@ import {MailOption} from '../../job/mail/interface';
 import {verifyState} from '../verify';
 import {appConfig, mailerConfig} from '../../config/config';
 
+export const getAllSignup = async (
+  req: Request<{}, {}>,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const result: ApiResponse = {
+      statusCode: 200,
+      message: '',
+      data: null,
+    };
+    const signups = await signupModel.readAllSignup();
+    result.statusCode = 200;
+    result.message = 'read all signup success';
+    result.data = signups;
+    response(res, result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getSignupById = async (
+  req: Request<{}, {}>,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const result: ApiResponse = {
+      statusCode: 200,
+      message: '',
+      data: null,
+    };
+    const signups = await signupModel.readAllSignup();
+    result.statusCode = 200;
+    result.message = 'read all signup success';
+    result.data = signups;
+    response(res, result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const postSignup = async (
   req: Request<{}, {}, signupInterface.PostSignup>,
   res: Response,
@@ -67,7 +109,7 @@ export const postSignup = async (
       <a href="${appConfig.serverHost}${mailerConfig.verifyRoute}/${id}?hash=${hash}">點擊以驗證</a>
       `,
     };
-    await sendMail(mailOption);
+    sendMail(mailOption);
     result.statusCode = 201;
     result.message = 'POST a signup success';
     result.data = signup;
