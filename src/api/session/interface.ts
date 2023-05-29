@@ -1,3 +1,4 @@
+import {type} from 'os';
 import {Signup} from '../signup';
 
 export interface Session {
@@ -23,6 +24,10 @@ export interface SessionStatus {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type PostSession = CreateSessionDto;
+
+export type PatchSession = UpdateSessionDto;
 
 export interface CreateSessionDto {
   name: string;

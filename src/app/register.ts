@@ -22,7 +22,7 @@ export const registerDatabase = async (): Promise<void> => {
       console.log('postgres initialize success');
     })
     .then(async () => {
-      await seedSession();
+      // await seedSession();
     })
     .catch((err: Error) => {
       console.error(err);

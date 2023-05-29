@@ -45,3 +45,7 @@ export const updateById = async (id: number, dto: UpdateSessionDto) => {
     dto
   );
 };
+
+export const deleteById = async (id: number) => {
+  return await repo.delete({id: id});
+};
