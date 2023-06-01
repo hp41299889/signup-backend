@@ -9,6 +9,7 @@ export interface Signup {
   isParking: boolean;
   isShuttle: boolean;
   isVerified: boolean;
+  isCheckin: boolean;
   session: Session;
 }
 

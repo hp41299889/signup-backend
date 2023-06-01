@@ -32,21 +32,28 @@ export const getAllSignup = async (
   }
 };
 
-export const getSignupById = async (
-  req: Request<{}, {}>,
+export const getCheckinById = async (
+  req: Request<{id: string}, {}>,
   res: Response,
   next: NextFunction
 ) => {
   try {
+    const {id} = req.params;
     const result: ApiResponse = {
       statusCode: 200,
       message: '',
       data: null,
     };
-    const signups = await signupModel.readAllSignup();
-    result.statusCode = 200;
-    result.message = 'read all signup success';
-    result.data = signups;
+    const signup = await signupModel.readSignupById(id);
+    if (signup) {
+      result.statusCode = 200;
+      result.message = 'read signup by id success';
+      result.data = signup;
+    } else {
+      result.statusCode = 400;
+      result.message = 'signup not found';
+      result.data = null;
+    }
     response(res, result);
   } catch (err) {
     next(err);
@@ -116,6 +123,28 @@ export const postSignup = async (
     response(res, result);
   } catch (err) {
     console.error(err);
+    next(err);
+  }
+};
+
+export const patchCheckinById = async (
+  req: Request<{id: string}, {}>,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const {id} = req.params;
+    const result: ApiResponse = {
+      statusCode: 200,
+      message: '',
+      data: null,
+    };
+    const checkined = await signupModel.updateSignupToCheckinById(id);
+    result.statusCode = 200;
+    result.message = 'update checkin success';
+    result.data = checkined;
+    response(res, result);
+  } catch (err) {
     next(err);
   }
 };
