@@ -27,3 +27,7 @@ export const readSignupById = async (id: string) => {
 export const updateSignupToVerifiedById = async (id: string) => {
   return await repo.update({id: id}, {isVerified: true});
 };
+
+export const updateSignupToCheckinById = async (id: string) => {
+  return await repo.update({id: id}, {isCheckin: true});
+};

@@ -31,6 +31,10 @@ export const signupEntity = new EntitySchema<Signup>({
     isVerified: {
       type: Boolean,
     },
+    isCheckin: {
+      type: Boolean,
+      default: false,
+    },
   },
   relations: {
     session: {
