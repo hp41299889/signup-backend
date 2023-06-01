@@ -21,6 +21,9 @@ export const readSignupById = async (id: string) => {
     where: {
       id: id,
     },
+    relations: {
+      session: true,
+    },
   });
 };
 
