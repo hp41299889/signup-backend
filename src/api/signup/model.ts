@@ -34,3 +34,7 @@ export const updateSignupToVerifiedById = async (id: string) => {
 export const updateSignupToCheckinById = async (id: string) => {
   return await repo.update({id: id}, {isCheckin: true});
 };
+
+export const deleteSignupById = async (id: string) => {
+  return await repo.delete({id: id});
+};

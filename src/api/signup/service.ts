@@ -148,3 +148,25 @@ export const patchCheckinById = async (
     next(err);
   }
 };
+
+export const deleteSignup = async (
+  req: Request<{id: string}, {}>,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const {id} = req.params;
+    const result: ApiResponse = {
+      statusCode: 200,
+      message: '',
+      data: null,
+    };
+    const deleted = await signupModel.deleteSignupById(id);
+    result.statusCode = 200;
+    result.message = 'delete signup success';
+    result.data = deleted;
+    response(res, result);
+  } catch (err) {
+    next(err);
+  }
+};
