@@ -1,6 +1,7 @@
 import {Router} from 'express';
 
 import {
+  deleteSignup,
   getAllSignup,
   getCheckinById,
   patchCheckinById,
@@ -10,4 +11,8 @@ import {
 export const signupRouter = Router();
 
 signupRouter.route('/').get(getAllSignup).post(postSignup);
-signupRouter.route('/:id').get(getCheckinById).patch(patchCheckinById);
+signupRouter
+  .route('/:id')
+  .get(getCheckinById)
+  .patch(patchCheckinById)
+  .delete(deleteSignup);
