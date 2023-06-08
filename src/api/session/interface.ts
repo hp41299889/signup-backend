@@ -1,4 +1,3 @@
-import {type} from 'os';
 import {Signup} from '../signup';
 
 export interface Session {

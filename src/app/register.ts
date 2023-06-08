@@ -1,4 +1,5 @@
 import {Express} from 'express';
+import session from 'express-session';
 
 import * as middleware from '../middleware';
 import {appConfig} from '../config/config';
@@ -22,9 +23,22 @@ export const registerDatabase = async (): Promise<void> => {
       console.log('postgres initialize success');
     })
     .then(async () => {
-      // await seedSession();
+      await seedSession();
     })
     .catch((err: Error) => {
       console.error(err);
     });
+};
+
+export const registerSession = async (app: Express) => {
+  app.use(
+    session({
+      secret: appConfig.sessionKey,
+      saveUninitialized: false,
+      resave: true,
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 4,
+      },
+    })
+  );
 };

@@ -110,10 +110,24 @@ export const postSignup = async (
     const mailOption: MailOption = {
       from: mailerConfig.user,
       to: body.email,
-      subject: '報名表單驗證',
+      subject: '兆豐銀行2023悠活家庭日報名表單及驗證',
       html: `
+      <p>感謝您報名兆豐銀行2023悠活家庭日活動：</p>
+      <p>姓名：${signup.name}</p>
+      <p>兆豐銀行員工編號：${signup.id}</p>
+      <p>場次：${signup.session.name}</p>
+      <p>停車資訊：${signup.isParking ? '是' : '否'}</p>
+      <p>接駁車資訊：${signup.isShuttle ? '是' : '否'}</p>
+      <p>報名人數：${signup.joinNumber}</p>
       <p>請點擊以下連結驗證</p></br>
-      <a href="${appConfig.serverHost}${mailerConfig.verifyRoute}/${id}?hash=${hash}">點擊以驗證</a>
+      <a href="${appConfig.serverHost}${
+        mailerConfig.verifyRoute
+      }/${id}?hash=${hash}">點擊以驗證</a>
+      ${
+        session.name !== '桃竹場'
+          ? ''
+          : '</br><p>本場次開放預訂免費帳篷營位42帳及自費蒙古包34包</p><a href="">點我看說明</a>'
+      }
       `,
     };
     sendMail(mailOption);

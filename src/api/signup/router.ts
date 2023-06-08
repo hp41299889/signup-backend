@@ -7,10 +7,11 @@ import {
   patchCheckinById,
   postSignup,
 } from './service';
+import {sessionCheck} from '../../middleware/session/session';
 
 export const signupRouter = Router();
 
-signupRouter.route('/').get(getAllSignup).post(postSignup);
+signupRouter.route('/').get(sessionCheck, getAllSignup).post(postSignup);
 signupRouter
   .route('/:id')
   .get(getCheckinById)

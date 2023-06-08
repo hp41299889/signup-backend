@@ -7,6 +7,9 @@ export interface AppConfig extends ServiceConfig {
   debug: string;
   environment: string;
   prefix: string;
+  sessionKey: string;
+  username: string;
+  password: string;
 }
 
 export interface PostgresConfig extends ServiceConfig {
