@@ -6,9 +6,14 @@ import * as register from './register';
 
 export const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+  })
+);
 
 const appInit = async (app: Express): Promise<void> => {
+  await register.registerSession(app);
   await register.registerRouter(app);
   await register.registerMiddleWare(app);
   await register.registerDatabase();

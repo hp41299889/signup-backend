@@ -10,6 +10,9 @@ export const appConfig: configInterface.AppConfig = {
   debug: env.APP_DEBUG || 'true',
   environment: env.APP_ENVIRONMENT || 'develop',
   prefix: env.APP_API_PREFIX || '',
+  sessionKey: env.APP_SESSION_KEY || '',
+  username: env.APP_USERNAME || 'mega',
+  password: env.APP_PASSWORD || 'mega',
 };
 
 export const postgresConfig: configInterface.PostgresConfig = {
