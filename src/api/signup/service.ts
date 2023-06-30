@@ -1,5 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {createHash} from 'crypto';
+import dayjs from 'dayjs';
 
 import {response} from '../../util';
 import {sessionModel} from '../session';
@@ -115,7 +116,9 @@ export const postSignup = async (
       <p>感謝您報名兆豐銀行2023悠活家庭日活動：</p>
       <p>姓名：${signup.name}</p>
       <p>兆豐銀行員工編號：${signup.id}</p>
-      <p>場次：${signup.session.name}</p>
+      <p>場次：${signup.session.name}–${signup.session.place}  ${dayjs(
+        signup.session.activityDate
+      ).format('YYYY-MM-DD HH:mm:ss')}</p>
       <p>停車資訊：${signup.isParking ? '是' : '否'}</p>
       <p>接駁車資訊：${signup.isShuttle ? '是' : '否'}</p>
       <p>報名人數：${signup.joinNumber}</p>

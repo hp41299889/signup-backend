@@ -20,6 +20,9 @@ export const sessionEntity = new EntitySchema<Session>({
     joinLimit: {
       type: Number,
     },
+    activityDate: {
+      type: 'timestamp',
+    },
     isParking: {
       type: Boolean,
     },

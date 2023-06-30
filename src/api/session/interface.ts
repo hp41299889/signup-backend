@@ -5,6 +5,7 @@ export interface Session {
   name: string;
   place: string;
   joinLimit: number;
+  activityDate: Date;
   isParking: boolean;
   isShuttle: boolean;
   createdAt: Date;
@@ -32,6 +33,7 @@ export interface CreateSessionDto {
   name: string;
   place: string;
   joinLimit: number;
+  activityDate: Date;
   isParking: boolean;
   isShuttle: boolean;
 }
@@ -40,6 +42,7 @@ export interface UpdateSessionDto {
   name: string;
   place: string;
   joinLimit: number;
+  activityDate: Date;
   isParking: boolean;
   isShuttle: boolean;
 }

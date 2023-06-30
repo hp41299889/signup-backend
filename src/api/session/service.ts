@@ -27,6 +27,7 @@ export const postSession = async (
       name: body.name,
       place: body.place,
       joinLimit: body.joinLimit,
+      activityDate: new Date(body.activityDate),
       isParking: body.isParking,
       isShuttle: body.isShuttle,
     };
@@ -108,6 +109,7 @@ export const patchSession = async (
       name: body.name,
       place: body.place,
       joinLimit: body.joinLimit,
+      activityDate: body.activityDate,
       isParking: body.isParking,
       isShuttle: body.isShuttle,
     };
