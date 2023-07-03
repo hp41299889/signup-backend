@@ -96,7 +96,8 @@ export const postSignup = async (
       joinNumber: body.joinNumber,
       isParking: body.isParking,
       isShuttle: body.isShuttle,
-      isVerified: false,
+      //信件驗證
+      isVerified: true,
       session: session,
     };
     const signup = await signupModel.createSignup(createSignupDto);
@@ -108,6 +109,12 @@ export const postSignup = async (
       hash: hash,
       life: nowTime + 3600 * 1000,
     };
+    const verifyString = `
+    ${
+      /*<p>請點擊以下連結驗證</p></br>
+  <a href="${appConfig.serverHost}${mailerConfig.verifyRoute}/${id}?hash=${hash}">點擊以驗證</a>*/ ''
+    }
+    `;
     const mailOption: MailOption = {
       from: mailerConfig.user,
       to: body.email,
@@ -122,10 +129,7 @@ export const postSignup = async (
       <p>停車資訊：${signup.isParking ? '是' : '否'}</p>
       <p>接駁車資訊：${signup.isShuttle ? '是' : '否'}</p>
       <p>報名人數：${signup.joinNumber}</p>
-      <p>請點擊以下連結驗證</p></br>
-      <a href="${appConfig.serverHost}${
-        mailerConfig.verifyRoute
-      }/${id}?hash=${hash}">點擊以驗證</a>
+      ${verifyString}
       ${
         session.name !== '桃竹場'
           ? ''
