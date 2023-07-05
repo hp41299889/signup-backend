@@ -1,6 +1,8 @@
 import {NextFunction, Request, Response} from 'express';
 import {createHash} from 'crypto';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
 import {response} from '../../util';
 import {sessionModel} from '../session';
@@ -10,7 +12,10 @@ import {ApiResponse} from '../interface';
 import {sendMail} from '../../job/mail';
 import {MailOption} from '../../job/mail/interface';
 import {verifyState} from '../verify';
-import {appConfig, mailerConfig} from '../../config/config';
+import {mailerConfig} from '../../config/config';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const getAllSignup = async (
   req: Request<{}, {}>,
@@ -125,7 +130,10 @@ export const postSignup = async (
       <p>兆豐銀行員工編號：${signup.id}</p>
       <p>場次：${signup.session.name}–${signup.session.place}  ${dayjs(
         signup.session.activityDate
-      ).format('YYYY-MM-DD HH:mm:ss')}</p>
+      )
+        .utc(true)
+        .tz(dayjs.tz.guess())
+        .format('YYYY-MM-DD HH:mm:ss')}</p>
       <p>停車資訊：${signup.isParking ? '是' : '否'}</p>
       <p>接駁車資訊：${signup.isShuttle ? '是' : '否'}</p>
       <p>報名人數：${signup.joinNumber}</p>
