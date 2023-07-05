@@ -106,6 +106,13 @@ export const postSignup = async (
       session: session,
     };
     const signup = await signupModel.createSignup(createSignupDto);
+    // console.log(
+    //   dayjs(signup.session.activityDate)
+    //     .utc(true)
+    //     .tz('Asia/Taipei')
+    //     .format('YYYY-MM-DD HH:mm:ss')
+    // );
+
     const nowTime = new Date().getTime();
     const hash = createHash('sha256')
       .update(id + nowTime.toString())
@@ -132,7 +139,7 @@ export const postSignup = async (
         signup.session.activityDate
       )
         .utc(true)
-        .tz(dayjs.tz.guess())
+        .tz('Asia/Taipei')
         .format('YYYY-MM-DD HH:mm:ss')}</p>
       <p>停車資訊：${signup.isParking ? '是' : '否'}</p>
       <p>接駁車資訊：${signup.isShuttle ? '是' : '否'}</p>
